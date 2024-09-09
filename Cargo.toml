@@ -4,3 +4,24 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
+cortex-m-rt = "0.7.3"
+panic-halt = "0.2.0"
+rtt-target = "0.5.0"
+embassy-sync = "0.6.0"
+embassy-time = "0.3.2"
+embedded-hal = "1.0.0"
+fugit = "0.3.7"
+
+[dependencies.embassy-executor]
+version = "0.6.0"
+features = ["arch-cortex-m", "executor-thread", "integrated-timers"] 
+
+[dependencies.embassy-nrf]
+version = "0.2.0"
+features = ["nrf52833", "time-driver-rtc1", "gpiote"] 
+
+[dependencies.futures]
+version = "0.3.30"
+default-features = false
+features = [ "async-await"]
