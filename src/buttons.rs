@@ -9,13 +9,13 @@ pub struct ButtonEvent {
     pub style: ButtonStyle,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum Button {
     A,
     B,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub enum ButtonStyle {
     Short,
     Long,
@@ -28,16 +28,16 @@ pub async fn task(
     button: Button,
 ) {
     loop {
-        input.wait_for_rising_edge().await;
+        input.wait_for_falling_edge().await;
 
         let pressed = Instant::now();
-        input.wait_for_falling_edge().await;
+        input.wait_for_rising_edge().await;
 
         let released = Instant::now();
 
         let duration = released - pressed;
 
-        let style = if duration.as_secs() >= 3 {
+        let style = if duration.as_secs() >= 2 {
             ButtonStyle::Long
         } else {
             ButtonStyle::Short
